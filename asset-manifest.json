@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3229af05.css",
+    "main.js": "/static/js/main.3066044d.js",
+    "static/js/787.129129af.chunk.js": "/static/js/787.129129af.chunk.js",
+    "static/media/booking.jpg": "/static/media/booking.12ee3ca9fca4280ab78b.jpg",
+    "static/media/lenskart.jpg": "/static/media/lenskart.7f361fe1076b26884bfd.jpg",
+    "static/media/nordStrom.jpg": "/static/media/nordStrom.00f9b6ba8c6b915798af.jpg",
+    "static/media/Dharmik_Puri_Goswami_Resume.pdf": "/static/media/Dharmik_Puri_Goswami_Resume.4313935cb02428209a94.pdf",
+    "index.html": "/index.html",
+    "main.3229af05.css.map": "/static/css/main.3229af05.css.map",
+    "main.3066044d.js.map": "/static/js/main.3066044d.js.map",
+    "787.129129af.chunk.js.map": "/static/js/787.129129af.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3229af05.css",
+    "static/js/main.3066044d.js"
+  ]
+}
