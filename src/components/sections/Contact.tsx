@@ -1,38 +1,38 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Github, 
-  Linkedin, 
-  Copy, 
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
+  Copy,
   Check,
   Send,
-  Loader2
-} from 'lucide-react';
-import { toast } from 'sonner';
+  Loader2,
+} from "lucide-react";
+import { toast } from "sonner";
 
 const contactInfo = [
   {
     icon: <Mail size={20} />,
-    label: 'Email',
-    value: 'dharmikpuri2004@gmail.com',
-    href: 'mailto:dharmikpuri2004@gmail.com',
+    label: "Email",
+    value: "dharmikpuri2004@gmail.com",
+    href: "mailto:dharmikpuri2004@gmail.com",
     copyable: true,
   },
   {
     icon: <Phone size={20} />,
-    label: 'Phone',
-    value: '+91 9352169357',
-    href: 'tel:+919352169357',
+    label: "Phone",
+    value: "+91 9352169357",
+    href: "tel:+919352169357",
     copyable: true,
   },
   {
     icon: <MapPin size={20} />,
-    label: 'Location',
-    value: 'Udaipur, India',
+    label: "Location",
+    value: "Udaipur, India",
     href: null,
     copyable: false,
   },
@@ -41,13 +41,13 @@ const contactInfo = [
 const socialLinks = [
   {
     icon: <Github size={20} />,
-    label: 'GitHub',
-    href: 'https://github.com/dharmikpuri',
+    label: "GitHub",
+    href: "https://github.com/dharmikpuri",
   },
   {
     icon: <Linkedin size={20} />,
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/dharmik-puri-goswami-b27272262/',
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/dharmik-puri-goswami-b27272262/",
   },
 ];
 
@@ -57,33 +57,36 @@ const Contact = () => {
   const [copiedValue, setCopiedValue] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
   });
 
   const handleCopy = async (value: string) => {
     try {
       await navigator.clipboard.writeText(value);
       setCopiedValue(value);
-      toast.success('Copied to clipboard!');
+      toast.success("Copied to clipboard!");
       setTimeout(() => setCopiedValue(null), 2000);
     } catch (err) {
-      toast.error('Failed to copy');
+      toast.error("Failed to copy");
     }
   };
+  // console.log(import.meta.env);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.email || !formData.message) {
-      toast.error('Please fill in all required fields');
+      toast.error("Please fill in all required fields");
       return;
     }
 
@@ -96,43 +99,54 @@ const Contact = () => {
       const emailjsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 
       if (!emailjsPublicKey || !emailjsServiceId || !emailjsTemplateId) {
-        // If EmailJS is not configured, open mailto link as fallback
-        const mailtoLink = `mailto:dharmikpuri2004@gmail.com?subject=${encodeURIComponent(formData.subject || 'Portfolio Contact')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`;
-        window.open(mailtoLink, '_blank');
-        toast.success('Opening your email client...');
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        toast.error(
+          "Service temporarily unavailable. Please contact me directly via email.",
+        );
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+
         setIsSubmitting(false);
         return;
       }
 
       // Dynamic import of EmailJS
-      const emailjs = await import('@emailjs/browser');
-      
+      const emailjs = await import("@emailjs/browser");
+
       await emailjs.send(
         emailjsServiceId,
         emailjsTemplateId,
         {
           from_name: formData.name,
           from_email: formData.email,
-          subject: formData.subject || 'Portfolio Contact',
+          phone: formData.phone,
           message: formData.message,
-          to_name: 'Dharmik',
+          to_name: "Dharmik",
         },
-        emailjsPublicKey
+        emailjsPublicKey,
       );
 
-      toast.success('Message sent successfully! I\'ll get back to you soon.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      toast.success("Message sent successfully! I'll get back to you soon.");
+      setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (error) {
-      console.error('Email send error:', error);
-      toast.error('Failed to send message. Please try again or use direct email.');
+      console.error("Email send error:", error);
+      toast.error(
+        "Failed to send message. Please try again or use direct email.",
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section id="contact" className="py-16 md:py-20 relative overflow-hidden bg-secondary/30">
+    <section
+      id="contact"
+      className="py-16 md:py-20 relative overflow-hidden bg-secondary/30"
+    >
       <div className="section-container relative z-10" ref={ref}>
         {/* Section Header */}
         <motion.div
@@ -141,7 +155,9 @@ const Contact = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-10"
         >
-          <span className="text-primary font-medium text-sm mb-2 block">Get In Touch</span>
+          <span className="text-primary font-medium text-sm mb-2 block">
+            Get In Touch
+          </span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">
             Let's <span className="gradient-text">Connect</span>
           </h2>
@@ -159,7 +175,10 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-1.5">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-muted-foreground mb-1.5"
+                    >
                       Name <span className="text-destructive">*</span>
                     </label>
                     <input
@@ -174,7 +193,10 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-muted-foreground mb-1.5">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-muted-foreground mb-1.5"
+                    >
                       Email <span className="text-destructive">*</span>
                     </label>
                     <input
@@ -190,21 +212,28 @@ const Contact = () => {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-muted-foreground mb-1.5">
-                    Subject
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-muted-foreground mb-1.5"
+                  >
+                    Phone Number
                   </label>
                   <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
                     onChange={handleInputChange}
-                    placeholder="What's this about?"
+                    placeholder="+91 XXXXX XXXXX"
                     className="w-full px-4 py-2.5 rounded-lg bg-background border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-sm"
                   />
                 </div>
+
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-muted-foreground mb-1.5">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-muted-foreground mb-1.5"
+                  >
                     Message <span className="text-destructive">*</span>
                   </label>
                   <textarea
@@ -248,16 +277,23 @@ const Contact = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <div className="glass-card p-6 h-full flex flex-col">
-              <h3 className="text-lg font-semibold mb-6">Contact Information</h3>
+              <h3 className="text-lg font-semibold mb-6">
+                Contact Information
+              </h3>
               <div className="space-y-4 flex-1">
                 {contactInfo.map((info) => (
-                  <div key={info.label} className="flex items-center justify-between group">
+                  <div
+                    key={info.label}
+                    className="flex items-center justify-between group"
+                  >
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-200">
                         {info.icon}
                       </div>
                       <div>
-                        <p className="text-xs text-muted-foreground">{info.label}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {info.label}
+                        </p>
                         {info.href ? (
                           <a
                             href={info.href}
@@ -289,7 +325,9 @@ const Contact = () => {
 
               {/* Social Links */}
               <div className="mt-8 pt-6 border-t border-border">
-                <h4 className="text-sm font-medium mb-4 text-muted-foreground">Follow Me</h4>
+                <h4 className="text-sm font-medium mb-4 text-muted-foreground">
+                  Follow Me
+                </h4>
                 <div className="flex gap-3">
                   {socialLinks.map((social) => (
                     <a
@@ -309,7 +347,12 @@ const Contact = () => {
               {/* Ready to work card */}
               <div className="mt-6 p-4 rounded-xl bg-primary/5 border border-primary/20">
                 <p className="text-sm text-muted-foreground">
-                  💼 <span className="font-medium text-foreground">Currently looking for new opportunities.</span> Whether you have a project in mind or just want to chat, I'd love to hear from you.
+                  💼{" "}
+                  <span className="font-medium text-foreground">
+                    Currently looking for new opportunities.
+                  </span>{" "}
+                  Whether you have a project in mind or just want to chat, I'd
+                  love to hear from you.
                 </p>
               </div>
             </div>
