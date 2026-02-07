@@ -24,22 +24,23 @@ const Hero = () => {
               transition={{ duration: 0.5 }}
               className="text-muted-foreground text-lg mb-4"
             >
-              Hey, I am Dharmik
+              Hi, I'm Dharmik — Full Stack Developer
             </motion.p>
 
             {/* Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-tight"
-            >
-              I build{' '}
-              <span className="gradient-text">scalable SaaS</span>
-              <br />
-              and{' '}
-              <span className="gradient-text">web applications</span>
-            </motion.h1>
+           <motion.h1
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: 0.1 }}
+  className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-tight"
+>
+  I build scalable{" "}
+  <span className="gradient-text">SaaS platforms</span>
+  <br />
+  and modern{" "}
+  <span className="gradient-text">web applications</span>
+</motion.h1>
+
 
             {/* Description */}
             <motion.p
@@ -48,8 +49,7 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-muted-foreground max-w-lg mb-8 leading-relaxed"
             >
-              Full Stack Developer with 1.5+ years of experience building scalable SaaS platforms, 
-              CRM systems, and AI-powered applications. Specialized in React.js, Node.js, and modern web technologies.
+              Full Stack Developer with 1.5+ years of experience building scalable SaaS platforms, CRM systems, and automation workflows. Experienced in React.js, Next.js, Node.js, and PostgreSQL, with strong expertise in API integrations, WhatsApp Business automation, and AI-powered production solutions.
             </motion.p>
 
             {/* CTA Buttons */}
