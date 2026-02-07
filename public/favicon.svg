@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <!-- Gradient matching hero text -->
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"></stop>
+      <stop offset="100%" stop-color="#6366f1"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- Soft light background instead of pure white -->
+  <rect width="100" height="100" rx="20" fill="#f3f4f6"></rect>
+
+  <!-- DP Text -->
+  <text x="50" y="62" font-size="42" text-anchor="middle" fill="url(#grad)" font-family="Arial, sans-serif" font-weight="bold">
+    DP
+  </text>
+</svg>
