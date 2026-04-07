@@ -49,7 +49,7 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-muted-foreground max-w-lg mb-8 leading-relaxed"
             >
-              Full Stack Developer with 1.5+ years of experience building scalable SaaS platforms, CRM systems, and automation workflows. Experienced in React.js, Next.js, Node.js, and PostgreSQL, with strong expertise in API integrations, WhatsApp Business automation, and AI-powered production solutions.
+              Software Engineer | Full Stack Developer with 2 years of experience building and scaling SaaS platforms and CRM systems using the MERN stack and Next.js. Skilled in backend architecture, API integrations, and performance optimization, delivering scalable and production-ready solutions.
             </motion.p>
 
             {/* CTA Buttons */}
